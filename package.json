@@ -22,6 +22,6 @@
         "gulp-livereload":"~3.8.0",
         "connect-livereload": "~0.4.0",
         "gulp-util": "~3.0.4",
-        "gulp-server-livereload":"~1.2.1",
+        "gulp-server-livereload":"~1.2.1"
     }
 }
