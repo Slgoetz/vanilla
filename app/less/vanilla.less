@@ -7,13 +7,10 @@
 ________________________   Digital Everything   _________________________
 */
 
-/* responsive sizes (mobile inclues tablet + phone) ******************************/
-
-@mega:     ~'screen and (min-width: 1700px)';
-@full:     ~'screen and (min-width: 1016px) ';
-@tablet:   ~'screen and (max-width: 1015px) and (min-width: 768px)';
-@phone:    ~'screen and (max-width: 767px)';
-@mobile:   ~'screen and (max-width: 1015px)'; // includes tablet and phone
-@retina: ~'only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)';
-
-
+@import 'normalize.less';
+// @import 'fonts.less';
+@import 'variables.less';
+@import 'grid.less';
+@import 'mixins.less';
+@import 'helpers.less';
+@import 'global.less';

@@ -17,16 +17,18 @@ var gulp         = require('gulp'),
 
 
 
-gulp.task('default', ['less', 'html', 'font'], function(){return env = 'development';})
-gulp.task('development', ['default', 'scripts', 'less', 'watch']);
-gulp.task('build', ['less', 'html', 'font', 'scripts']);
+gulp.task('dev', function(){ env = 'development';})
+gulp.task('prod', function(){ env = '';})
+gulp.task('development', ['dev', 'less', 'scripts', 'watch']);
+gulp.task('build', ['prod','less', 'html', 'font', 'scripts']);
 
 
 var path = {
-    less:   ['app/less/**/*.less'],
-    html:   ['app/html/*.html'],
-    images: ['app/img/**/*'],
-    fonts:  ['app/fonts/**/*']
+    less:   ['./app/less/**/*.less'],
+    js:   	['./app/js/**/*.js'],
+    html:   ['./app/html/*.html'],
+    images: ['./app/img/**/*'],
+    fonts:  ['./app/fonts/**/*']
 },
 env = '',
 onError = function(err) {
@@ -36,30 +38,43 @@ onError = function(err) {
 
 
 gulp.task('less',function(){
-	gulp.src(path.less)
-	.pipe(plumber({
-	    errorHandler: onError
-	}))
-	.pipe(less({
-        sourceMap: true
-    }))
-    .pipe(minifycss())
-    .pipe(gulp.dest('./dist/styles'));
+	if (env === 'development') {
+		gulp.src('./app/less/main.less')
+		.pipe(plumber({
+		    errorHandler: onError
+		}))
+		.pipe(less({
+	        sourceMap: true
+	    }))
+	    .pipe(gulp.dest('./app/css'));
+	}else{
+		gulp.src('./app/less/main.less')
+		.pipe(plumber({
+		    errorHandler: onError
+		}))
+		.pipe(less({
+	        sourceMap: true
+	    }))
+	    .pipe(minifycss('main.css'))
+	    .pipe(gulp.dest('./dist/styles'));
+	}
+	
 });
 
 gulp.task('html', function() {
-    var process = gulp.src(path.html)
-	    .pipe(minifyhtml({
-	        comments: false,
-	        spare: true,
-	        empty: true,
-	        quotes: true
-	    }))
-	    .pipe(gulp.dest('./dist/html'))
+	var process = gulp.src(path.html)
+    .pipe(minifyhtml({
+        comments: false,
+        spare: true,
+        empty: true,
+        quotes: true
+    }))
+    .pipe(gulp.dest('./dist/html'));
 });
 
 
 gulp.task('font', function () {
+
     gulp.src(path.fonts)
         .pipe(filter('**/*.{eot,svg,ttf,woff, woff2}'))
         .pipe(gulp.dest('./dist/fonts'));
@@ -67,17 +82,15 @@ gulp.task('font', function () {
 
 gulp.task('scripts', function(e) {
 	if (env == 'development') {
-    	gulp.src(['./app/js/main.js'])
-    	    .pipe(plumber({
-    	        errorHandler: onError
-    	    }))
-    	    .pipe(uglify({
-    	        mangle: false,
-    	        compress: {
-    	            dead_code: true
-    	        }
-    	    }))
-    	    .pipe(gulp.dest('./app/js/main.min.js'))
+    	gulp.src([
+			'./app/js/plugins.js', 
+			'./app/js/main.js'
+		])
+	    .pipe(plumber({
+	        errorHandler: onError
+	    }))
+	    .pipe(concat('all.js'))
+	    .pipe(gulp.dest('./app/js/'));
     }else{
 		gulp.src(['./app/js/main.js'])
 		    .pipe(plumber({
@@ -89,6 +102,7 @@ gulp.task('scripts', function(e) {
 		            dead_code: true
 		        }
 		    }))
+		    .pipe(concat('all.min.js'))
 		    .pipe(gulp.dest('./dist/js'));
 	}
 
@@ -98,6 +112,7 @@ gulp.task('scripts', function(e) {
 gulp.task('watch',['serve'], function() {
     if (env == 'development') {
         gulp.watch(path.less, ['less']);
+        gulp.watch(path.js, ['scripts']);
         gulp.watch(path.images, ['images']);
         gulp.watch(path.assets, ['fonts']);
         gulp.watch(path.html, ['html']);
