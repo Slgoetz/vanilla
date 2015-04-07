@@ -4,10 +4,10 @@
 //===============================================================/
 
 @mega:      		~'screen and (min-width: 1700px)';
-@full:      		~'screen and (min-width: 1016px) ';
-@tablet:    		~'screen and (max-width: 1015px) and (min-width: 768px)';
+@full:      		~'screen and (min-width: 1025px) ';
+@tablet:    		~'screen and (max-width: 1024px) and (min-width: 768px)';
 @phone:     		~'screen and (max-width: 767px)';
-@mobile:    		~'screen and (max-width: 1015px)'; // includes tablet and phone
+@mobile:    		~'screen and (max-width: 1024px)'; // includes tablet and phone
 @retina:			~'only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)';
 
 
