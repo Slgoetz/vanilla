@@ -91,10 +91,10 @@
 //  Margin Helpers
 //===============================================================/
 .generate-margins(@n, @i: 1) when (@i =< @n) {
-  .mt@{i}{margin-top: 1vw * @i;}
-  .mb@{i}{margin-bottom: 1vw * @i;}
-  .pt@{i}{padding-top: 1vw * @i;}
-  .pb@{i}{padding-bottom: 1vw * @i;}
+  .mt@{i}{margin-top: 1vw * @i; @media @phone{margin-top:10px * @i;} }
+  .mb@{i}{margin-bottom: 1vw * @i; @media @phone{margin-bottom:10px * @i;} }
+  .pt@{i}{padding-top: 1vw * @i; @media @phone{padding-top:10px * @i;} }
+  .pb@{i}{padding-bottom: 1vw * @i;} @media @phone{padding-bottom:10px * @i;} 
 
   //Chagne Number
   .generate-margins(@n, (@i + 1));
