@@ -1,72 +1,60 @@
-/*
-Set the Font size in REM and fallabck to px
-*/
-.font-size(@sizeValue) when not (@sizeValue = inherit) {
-    @remValue: @sizeValue;
-    @pxValue: (@sizeValue * 10);
-    font-size: ~"@{pxValue}px";
-    font-size: ~"@{remValue}rem";
+//===============================================================/
+//  General
+//===============================================================/
+
+.opacity (@opacity: 0.5) {
+  -webkit-opacity:  @opacity;
+  -moz-opacity:     @opacity;
+  opacity:    @opacity;
 }
 
-.clearfix() {
-  &:before,
-  &:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-  }
-  &:after {
-    clear: both;
-  }
+.full-bk(@position: center center, @size: cover) {
+  background-repeat:       no-repeat;
+  background-position:     @position; 
+  -webkit-background-size: @size;
+  -moz-background-size:    @size;
+  -o-background-size:      @size;
+  -ms-background-size:     @size;
+  background-size:         @size;
 }
 
-/* Borders */
-.border-top-radius(@radius) {
-  border-top-right-radius: @radius;
-   border-top-left-radius: @radius;
-}
-.border-right-radius(@radius) {
-  border-bottom-right-radius: @radius;
-     border-top-right-radius: @radius;
-}
-.border-bottom-radius(@radius) {
-  border-bottom-right-radius: @radius;
-   border-bottom-left-radius: @radius;
-}
-.border-left-radius(@radius) {
-  border-bottom-left-radius: @radius;
-     border-top-left-radius: @radius;
+.box-sizing(@style:border-box){
+  box-sizing:@style;
+  -moz-box-sizing:@style;
+  -webkit-box-sizing:@style;
 }
 
-/* Disable Selecting */
-.no-select() {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.shadow(@horOff:0px, @vertOff:0px , @blur:8px, @spread:1px, @color:rgba(0, 0, 0, 0.15)) {
+  -moz-box-shadow:    @horOff @vertOff @blur @spread @color;
+  -webkit-box-shadow: @horOff @vertOff @blur @spread @color;
+  box-shadow:         @horOff @vertOff @blur @spread @color;
 }
 
-.backface-visibility(@visibility) {
-    backface-visibility: @visibility;
-    -webkit-backface-visibility: @visibility;
+.border-radius (@radius: 0px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius:    @radius;
+  border-radius:         @radius;
+
 }
 
-/* Drop Shadows */
-.box-shadow(@shadow) {
-  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
-          box-shadow: @shadow;
+.text-shadow (@string: 4px 4px 0px rgba(0, 0, 0, 0.15)) {
+  text-shadow: @string;
 }
 
-/* Placeholder */
-.placeholder(@color: @input-color-placeholder) {
-    &:-moz-placeholder            { color: @color; } // Firefox 4-18
-    &::-moz-placeholder           { color: @color; } // Firefox 19+
-    &:-ms-input-placeholder       { color: @color; } // Internet Explorer 10+
-    &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
+
+//===============================================================/
+//  Gradients
+//===============================================================/
+
+.gradient (@startColor: @body, @endColor: @white, @height: 1%) {
+  background-color: @startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from(@startColor) 50%, to(@endColor) 50%);
+  background: -webkit-linear-gradient(top, @startColor 50%, @endColor  50%);
+  background: -moz-linear-gradient(top, @startColor  50%, @endColor  50%);
+  background: -ms-linear-gradient(top, @startColor  50%, @endColor  50%);
+  background: -o-linear-gradient(top, @startColor  50%, @endColor  50%);
 }
 
-/* Gradients */
 .radial-gradient(@start, @start_stop, @end, @end_stop){
     background: @start; /* Old browsers */
     background: -moz-radial-gradient(center, ellipse cover,  @start @start_stop, @end @end_stop); /* FF3.6+ */
@@ -96,11 +84,97 @@ Set the Font size in REM and fallabck to px
     filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color),argb(@end-color))); // IE9 and down
 }
 
-/* Transitions */
-.transition(@transition) {
-  -webkit-transition: @transition;
-          transition: @transition;
+
+
+
+
+//===============================================================/
+//  Helper
+//===============================================================/
+.no-select() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.backface-visibility(@visibility) {
+    backface-visibility: @visibility;
+    -webkit-backface-visibility: @visibility;
+}
+
+.placeholder(@color: @input-color-placeholder) {
+    &:-moz-placeholder            { color: @color; } // Firefox 4-18
+    &::-moz-placeholder           { color: @color; } // Firefox 19+
+    &:-ms-input-placeholder       { color: @color; } // Internet Explorer 10+
+    &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
+}
+
+.background-cover() {
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
+
+//===============================================================/
+//  Transitions
+//===============================================================/
+.transition(@property: all, @duration: 250ms, @delay: 0ms, @easing: ease-in-out) {
+  -webkit-transition: @arguments;
+  -moz-transition:    @arguments;
+  -ms-transition:     @arguments;
+  -o-transition:      @arguments;
+  transition:         @arguments;
+}
+
+
+.delay(@time){
+  animation-delay:@time;
+  -moz-animation-delay: @time;
+  -webkit-animation-delay: @time;
+}
+
+
+.rotate(@degrees) {
+  -webkit-transform: rotate(@degrees + 0deg);
+  -moz-transform:    rotate(@degrees + 0deg);
+  -ms-transform:     rotate(@degrees + 0deg);
+  -o-transform:      rotate(@degrees + 0deg);
+  transform:         rotate(@degrees + 0deg);
+  //filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.scale(@x:1, @y:1) {
+  -webkit-transform: scale(@x, @y);
+  -moz-transform:    scale(@x, @y);
+  -ms-transform:     scale(@x, @y);
+  -o-transform:      scale(@x, @y);
+  transform:         scale(@x, @y);
+}
+
+.transform(@blah) {
+  -webkit-transform: @blah;
+  -moz-transform:    @blah;
+  -ms-transform:     @blah;
+  -o-transform:      @blah;
+  transform:         @blah;
+}
+
 
 .transition-transform(@transition) {
   -webkit-transition: -webkit-transform @transition;
@@ -126,66 +200,13 @@ Set the Font size in REM and fallabck to px
           transition: transform @transition;
 }
 
-/* Transformations */
-.transform(@transform) {
-  -webkit-transform: @transform;
-      -ms-transform: @transform; // IE9 only
-          transform: @transform;
+.transform-origin(@x, @y){
+    -webkit-transform-origin:@x @y;
+  animation-transform-origin: @x @y;
 }
-
-.rotate(@degrees) {
-  -webkit-transform: rotate(@degrees);
-      -ms-transform: rotate(@degrees); // IE9 only
-          transform: rotate(@degrees);
-}
-.scale(@ratio; @ratio-y...) {
-  -webkit-transform: scale(@ratio, @ratio-y);
-      -ms-transform: scale(@ratio, @ratio-y); // IE9 only
-          transform: scale(@ratio, @ratio-y);
-}
-.translate(@x; @y) {
-  -webkit-transform: translate(@x, @y);
-      -ms-transform: translate(@x, @y); // IE9 only
-          transform: translate(@x, @y);
-}
-.skew(@x; @y) {
-  -webkit-transform: skew(@x, @y);
-      -ms-transform: skewX(@x) skewY(@y); // See https://github.com/twbs/bootstrap/issues/4885; IE9+
-          transform: skew(@x, @y);
-}
-.translate3d(@x; @y; @z) {
-  -webkit-transform: translate3d(@x, @y, @z);
-          transform: translate3d(@x, @y, @z);
-}
-
-.rotateX(@degrees) {
-  -webkit-transform: rotateX(@degrees);
-      -ms-transform: rotateX(@degrees); // IE9 only
-          transform: rotateX(@degrees);
-}
-.rotateY(@degrees) {
-  -webkit-transform: rotateY(@degrees);
-      -ms-transform: rotateY(@degrees); // IE9 only
-          transform: rotateY(@degrees);
-}
-.perspective(@perspective) {
-  -webkit-perspective: @perspective;
-     -moz-perspective: @perspective;
-          perspective: @perspective;
-}
-.perspective-origin(@perspective) {
-  -webkit-perspective-origin: @perspective;
-     -moz-perspective-origin: @perspective;
-          perspective-origin: @perspective;
-}
-.transform-origin(@origin) {
-  -webkit-transform-origin: @origin;
-     -moz-transform-origin: @origin;
-      -ms-transform-origin: @origin; // IE9 only
-          transform-origin: @origin;
-}
-
-/* Animation */
+//===============================================================/
+//  Animations
+//===============================================================/
 .animation(@animation) {
   -webkit-animation: @animation;
           animation: @animation;
@@ -215,11 +236,18 @@ Set the Font size in REM and fallabck to px
           animation-direction: @direction;
 }
 
-.background-cover() {
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+
+//===============================================================/
+//  Keyframes
+//===============================================================/
+.keyframes(@name; @arguments) {
+  @-moz-keyframes @name { @arguments(); }
+  @-webkit-keyframes @name { @arguments(); }
+  @keyframes @name { @arguments(); }
+  @-o-keyframes @name { @arguments(); }
 }
+
+
+
+
+

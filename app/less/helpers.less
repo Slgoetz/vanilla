@@ -1,5 +1,7 @@
+//===============================================================/
+//  Break Point Helpers
+//===============================================================/
 
-/* ===================== Break Point Hiders ===================== */
 .hide-on-mobile {
     @media @mobile {
         display: none !important;
@@ -15,7 +17,6 @@
         display: none !important;
     }
 }
-
 .only-on-mobile {
   @media @full{
     display: none !important;
@@ -30,32 +31,114 @@
   }
 }
 
+//===============================================================/
+//  Visible Helpers
+//===============================================================/
 
-/* ===================== Helpers ===================== */
+.hidden{
+  display: none !important;
+}
 
-.vert-centered{
-	position: relative;
-  	top: 50%;
-  	transform: translateY(-50%);
+
+
+//===============================================================/
+//  Align Helpers
+//===============================================================/
+
+
+.vert-center{
+  position: relative;
+  top: 50%;
+  .transform(translateY(-50%));
+}
+
+.horz-center{
+  position: relative;
+  left: 50%;
+  .transform(translateX(-50%));
+}
+.both-center{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  .transform(translateY(-50%)translateX(-50%));
 }
 
 .text-center{
-	text-align: center;
+  text-align: center;
 }
 
 .float-left{
-	float: left;
+  float: left;
 }
 
 .float-right{
-	float: right;
+  float: right;
 }
 
 .full-width{
-	width: 100%;
+  width: 100%;
 }
 
-/* ===================== Clears ===================== */
+.center{
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+//===============================================================/
+//  Margin Helpers
+//===============================================================/
+.generate-margins(@n, @i: 1) when (@i =< @n) {
+  .mt@{i}{margin-top: 1vw * @i;}
+  .mb@{i}{margin-bottom: 1vw * @i;}
+  .pt@{i}{padding-top: 1vw * @i;}
+  .pb@{i}{padding-bottom: 1vw * @i;}
+
+  //Chagne Number
+  .generate-margins(@n, (@i + 1));
+}.generate-margins(15);
+
+
+
+//===============================================================/
+//  Grid Helpers
+//===============================================================/
+
+.ml(@col, @gut){margin-left:  ( (@column*@col) + (@gutter * @gut) );}
+.mr(@col, @gut){margin-right: ( (@column*@col) + (@gutter * @gut) );}
+.ml-mr(@col, @gut){
+  margin-left:  ( (@column*@col) + (@gutter * @gut) );
+  margin-right:  ( (@column*@col) + (@gutter * @gut) );
+}
+
+.pl(@col, @gut){padding-left: ( (@column*@col) + (@gutter * @gut) );}
+.pr(@col, @gut){padding-right:( (@column*@col) + (@gutter * @gut) );}
+.pl-pr(@col, @gut){
+  padding-left:  ( (@column*@col) + (@gutter * @gut) );
+  padding-right:  ( (@column*@col) + (@gutter * @gut) );
+}
+
+.iml(@col, @gut, @width){margin-left:  ( (@column*@col) + (@gutter * @gut) )/@width;}
+.imr(@col, @gut, @width){margin-right: ( (@column*@col) + (@gutter * @gut) )/@width;}
+
+.ipl(@col, @gut, @width){padding-left: ( (@column*@col) + (@gutter * @gut) )/@width;}
+.ipr(@col, @gut, @width){padding-right:( (@column*@col) + (@gutter * @gut) )/@width;}
+
+.width(@columnnum, @gutternum){width: ( (@columnnum*@column)  + (@gutternum * @gutter) );}
+
+
+.innerWidth(@columnnum, @gutternum, @width: 1){
+  width: ( (@columnnum*@column) + (@gutternum * @gutter) )/@width;
+}
+
+
+
+
+//===============================================================/
+//  Clear Helpers
+//===============================================================/
 
 .clear:before {
   content: '';
