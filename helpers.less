@@ -6,6 +6,12 @@
     @media @mobile {
         display: none !important;
     }
+    @media @tablet {
+        display: none !important;
+    }
+    @media @phone {
+        display: none !important;
+    }
 }
 .hide-on-tablet {
     @media @tablet {
@@ -19,6 +25,9 @@
 }
 .only-on-mobile {
   @media @full{
+    display: none !important;
+  }
+  @media @mega{
     display: none !important;
   }
 }
@@ -139,7 +148,6 @@
 //===============================================================/
 //  Clear Helpers
 //===============================================================/
-
 .clear:before {
   content: '';
   display: table;
