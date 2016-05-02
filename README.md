@@ -1,7 +1,8 @@
-Vanilla
-Milkshake Studio
+#Vanilla
+by - Milkshake Studio
 
-Widths, Margins, and Padding
+
+##Widths, Margins, and Padding
 
 Width: .width(@col, @gutter);
 Inner Width: .innerWidth(@col, @gutter, @parentWidth);
@@ -23,7 +24,7 @@ Right Padding: .pr(@col, @gutter);
 Inner Right Padding: .ipr(@col, @gutter, @parentWidth);
 
 
-Vertical Padding & Margins
+##Vertical Padding & Margins
 
 The global padding and margin helper classes go from 1-10 where 1 = 1vw with fallback to 1 = 10px
 
