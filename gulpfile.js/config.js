@@ -13,7 +13,7 @@ module.exports = {
 
   path: {
     less      : [ dist+'less/**/*'],
-    lessEntry : dist+'less/main.less',
+    lessEntry : dist+'less/vanilla.less',
   },
 
   onError: function(err) {
