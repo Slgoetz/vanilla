@@ -84,6 +84,23 @@
     filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color),argb(@end-color))); // IE9 and down
 }
 
+//===============================================================/
+//  FLEX
+//===============================================================/
+
+.flex(@flex-display: flex, @direction: column,  @align: center, @justify: center){
+  display:                 -webkit-@flex-display; /* Safari */
+  display:                 @flex-display;
+
+  -webkit-flex-direction:  @direction; /* Safari */
+  flex-direction:          @direction;
+
+  -webkit-align-items:     @align;
+  align-items:             @align;
+
+  -webkit-justify-content: @justify;
+  justify-content:         @justify;
+}
 
 
 
