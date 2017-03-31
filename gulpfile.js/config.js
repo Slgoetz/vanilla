@@ -14,6 +14,7 @@ module.exports = {
   path: {
     less      : [ dist+'less/**/*'],
     lessEntry : dist+'less/vanilla.less',
+    sassEntry : dist+'sass/vanilla.scss',
   },
 
   onError: function(err) {
