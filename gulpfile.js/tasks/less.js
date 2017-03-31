@@ -8,7 +8,7 @@ var gulp        = require('gulp'),
     sourcemaps  = require('gulp-sourcemaps'),
     config      = require('../config');
 
-gulp.task('less',  function() {
+gulp.task('less',  function(cb) {
     gulp.src(config.path.lessEntry)
         .pipe(plumber({
             errorHandler: config.onError
@@ -16,9 +16,8 @@ gulp.task('less',  function() {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(sourcemaps.write())
-
         .pipe(gulp.dest(config.dest.css))
-        .pipe(notify('Less Compiled'));
+        .pipe(notify('Less Compiled') );
 });
 
 
@@ -29,9 +28,6 @@ gulp.task('min',  ['less'], function(cb) {
             errorHandler: config.onError
         }))
         .pipe(less())
-        .pipe(plumber({
-            errorHandler: config.onError
-        }))
         .pipe(minifyCss())
         .pipe(rename({
             extname: ".min.css"
