@@ -17,6 +17,6 @@ gulp.task('sass', function (cb) {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./css'))
+    .pipe(gulp.dest(config.dest.css))
     .pipe(notify('Sass Compiled'));
 });
