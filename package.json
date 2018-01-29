@@ -10,9 +10,7 @@
   ],
   "version": "0.0.1",
   "main": "gulpfile.js",
-  "dependencies": {
-    "jquery": "^1.11.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "del": "^2.2.2",
     "gulp": "^3.9.1",
