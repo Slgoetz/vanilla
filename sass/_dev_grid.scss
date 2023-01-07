@@ -2,35 +2,53 @@
 //                   For Development ONLY
 //===============================================================/
 
-.gridMe{
+.gridMe {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 9999;
+   pointer-events: none;
 
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9999;
-    &.hidden{
-        display: none;
-    }
+   &.hidden {
+      display: none;
+   }
 
-    div{
-        position: absolute;
-        height: 100%;
-        width: $column;
-        position: absolute;
-        background-color: rgba(2,238,255,.1);
-        border-left:1px solid rgba(2,238,255,1);
-        border-right:1px solid rgba(2,238,255,1);
-        // @include box-sizing;
+   div {
+      position: absolute;
+      height: 100%;
+      width: $column;
+      background-color: rgba(pink, 0.3);
+      border-left: 1px solid rgba(pink, 1);
+      border-right: 1px solid rgba(pink, 1);
+      pointer-events: none;
 
-        @for $nth from 1 through $columnCount{
-           &:nth-child(#{$nth}){
-               left: ($column * $nth) + ($gutter * ($nth + 1));
-           }
-        }
+      // Column count for desktop
+      @for $nth from 1 through $columnCount {
+         &:nth-child(#{$nth}) {
+            left: ($column * ($nth - 1)) + ($gutter * ($nth - 1)) + $outerGutter;
+         }
+      }
 
-    }
+      //Column Count for mobile
+      @media #{$phone},
+      #{$tablet-portrait} {
+         width: $phoneColumn;
 
+         @for $nth from 1 through $columnCount {
+            @if $nth <=20 {
+               &:nth-child(#{$nth}) {
+                  left: ($phoneColumn * ($nth - 1)) + ($phoneGutter * ($nth - 1)) + $phoneOuterGutter;
+               }
+            }
+
+            @else {
+               &:nth-child(#{$nth}) {
+                  display: none;
+               }
+            }
+         }
+      }
+   }
 }
-

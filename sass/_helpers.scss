@@ -1,166 +1,168 @@
+// ---------------------------------------------
+// font sizing
+// ---------------------------------------------
+@function rem($pixels, $context: $base-size) {
+   @return math.div($pixels, $context) * 1rem;
+}
+
+// ---------------------------------------------
+// padding
+// ---------------------------------------------
+@function pad($count) {
+   @return calc(8px * #{$count});
+}
+
 //===============================================================/
 //  Break Point Helpers
 //===============================================================/
 
 .hide-on-mobile {
-    @media #{$mobile} {
-        display: none !important;
-    }
-    @media #{$tablet} {
-        display: none !important;
-    }
-    @media #{$phone} {
-        display: none !important;
-    }
+   @media #{$tablet-portrait} {
+      display: none !important;
+   }
+
+   @media #{$phone} {
+      display: none !important;
+   }
 }
+
 .hide-on-tablet {
-    @media #{$tablet} {
-        display: none !important;
-    }
+   @media #{$tablet} {
+      display: none !important;
+   }
 }
+
 .hide-on-phone {
-    @media #{$phone} {
-        display: none !important;
-    }
+   @media #{$phone} {
+      display: none !important;
+   }
 }
+
 .only-on-mobile {
-  @media #{$full}{
-    display: none !important;
-  }
-  @media #{$mega}{
-    display: none !important;
-  }
+   display: none !important;
+
+   @media #{$tablet-portrait} {
+      display: block !important;
+   }
+
+   @media #{$phone} {
+      display: block !important;
+   }
 }
+
 .only-on-phone {
-  @media #{$full}{
-    display: none !important;
-  }
-  @media #{$tablet}{
-    display: none !important;
-  }
+   display: none !important;
+
+   @media #{$phone} {
+      display: block !important;
+   }
 }
 
 //===============================================================/
 //  Visible Helpers
 //===============================================================/
 
-.hidden{
-  display: none !important;
+.hidden {
+   display: none !important;
 }
 
-
-
-//===============================================================/
-//  Align Helpers
-//===============================================================/
-
-
-.vert-center{
-  position: relative;
-  top: 50%;
-  @include transform(translateY(-50%));
-}
-
-.horz-center{
-  position: relative;
-  left: 50%;
-  @include transform(translateX(-50%));
-}
-.both-center{
-  position: relative;
-  left: 50%;
-  top: 50%;
-  @include transform(translateY(-50%)translateX(-50%));
-}
-
-.text-center{
-  text-align: center;
-}
-
-.float-left{
-  float: left;
-}
-
-.float-right{
-  float: right;
-}
-
-.full-width{
-  width: 100%;
-}
-
-.center{
-  float: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+.noscroll {
+   overflow: hidden;
 }
 
 
 //===============================================================/
 //  Margin Helpers
 //===============================================================/
-@for $i from 1 through 15{
-  .mt#{$i}{margin-top: 1vw * $i;}
-  .mb#{$i}{margin-bottom: 1vw * $i;}
-  .pt#{$i}{padding-top: 1vw * $i;}
-  .pb#{$i}{padding-bottom: 1vw * $i;}
+@for $i from 1 through 20 {
+   .mt#{$i} {
+      margin-top: $gridSize * $i;
+   }
+
+   .mb#{$i} {
+      margin-bottom: $gridSize * $i;
+   }
+
+   .pt#{$i} {
+      padding-top: $gridSize * $i;
+   }
+
+   .pb#{$i} {
+      padding-bottom: $gridSize * $i;
+   }
 }
-
-
 
 //===============================================================/
 //  Grid Helpers
 //===============================================================/
 
-@mixin ml($col, $gut){margin-left:  ( ($column*$col) + ($gutter * $gut) );}
-@mixin mr($col, $gut){margin-right: ( ($column*$col) + ($gutter * $gut) );}
+@mixin ml($col, $gut, $outGut: 0) {
+   margin-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
 
-@mixin ml-mr($col, $gut){
-  margin-left:  ( ($column*$col) + ($gutter * $gut) );
-  margin-right:  ( ($column*$col) + ($gutter * $gut) );
+   @media #{$phone} {
+      margin-left: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
 }
 
-@mixin pl($col, $gut){padding-left: ( ($column*$col) + ($gutter * $gut) );}
-@mixin pr($col, $gut){padding-right:( ($column*$col) + ($gutter * $gut) );}
-@mixin pl-pr($col, $gut){
-  padding-left:  ( ($column*$col) + ($gutter * $gut) );
-  padding-right:  ( ($column*$col) + ($gutter * $gut) );
+@mixin mr($col, $gut, $outGut: 0) {
+   margin-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+
+   @media #{$phone} {
+      margin-right: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
 }
 
-@mixin iml($col, $gut, $width){margin-left:  ( ($column*$col) + ($gutter * $gut) )/$width;}
-@mixin imr($col, $gut, $width){margin-right: ( ($column*$col) + ($gutter * $gut) )/$width;} 
-@mixin ipl($col, $gut, $width){padding-left: ( ($column*$col) + ($gutter * $gut) )/$width;}
-@mixin ipr($col, $gut, $width){padding-right:( ($column*$col) + ($gutter * $gut) )/$width;}
+@mixin ml-mr($col, $gut, $outGut: 0) {
+   margin-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+   margin-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
 
-@mixin width($columnnum, $gutternum){width: ( ($columnnum*$column)  + ($gutternum * $gutter) );}
+   @media #{$phone} {
+      margin-left: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+      margin-right: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
+}
 
+@mixin my($gap: $gridSize) {
+   margin-top: pad($gap);
+   margin-bottom: pad($gap);
+}
 
-@mixin innerWidth($columnnum, $gutternum, $width: 1){
-  width: ( ($columnnum*$column) + ($gutternum * $gutter) )/$width;
+@mixin pl($col, $gut, $outGut: 0) {
+   padding-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+
+   @media #{$phone} {
+      padding-left: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
+}
+
+@mixin pr($col, $gut, $outGut: 0) {
+   padding-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+
+   @media #{$phone} {
+      padding-right: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
+}
+
+@mixin pl-pr($col, $gut, $outGut: 0) {
+   padding-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+   padding-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
+
+   @media #{$phone} {
+      padding-left: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+      padding-right: (($phoneColumn * $col) + ($phoneGutter * $gut) + ($phoneOuterGutter * $outGut));
+   }
+}
+
+@mixin py($gap: $gridSize) {
+   padding-top: pad($gap);
+   padding-bottom: pad($gap);
 }
 
 
+@mixin width($columnnum, $gutternum, $outGut: 0) {
+   width: (($columnnum * $column) + ($gutternum * $gutter) + ($outerGutter * $outGut));
 
-
-//===============================================================/
-//  Clear Helpers
-//===============================================================/
-.clear:before {
-  content: '';
-  display: table;
+   @media #{$phone} {
+      width: (($columnnum * $phoneColumn) + ($gutternum * $phoneGutter) + ($phoneOuterGutter * $outGut));
+   }
 }
-.clear:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-.no-clear:before {
-  content: normal;
-  display: inherit;
-}
-.no-clear:after {
-  content: normal;
-  display: inherit;
-  clear: none;
-}
-
