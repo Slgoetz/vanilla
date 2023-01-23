@@ -54,16 +54,15 @@
 //  FLEX
 //===============================================================/
 
-@mixin flex($flex-display: flex,
+@mixin flex(
    $direction: column,
    $align: center,
    $justify: center) {
-   display: -webkit-$flex-display;
-   /* Safari */
-   display: $flex-display;
+
+   display: -webkit-flex;
+   display:  flex;
 
    -webkit-flex-direction: $direction;
-   /* Safari */
    flex-direction: $direction;
 
    -webkit-align-items: $align;
@@ -124,40 +123,4 @@
    // Safari and Chrome
 }
 
-//===============================================================/
-//  Animations
-//===============================================================/
-@mixin animation($animation) {
-   -webkit-animation: $animation;
-   animation: $animation;
-}
 
-@mixin animation-name($name) {
-   -webkit-animation-name: $name;
-   animation-name: $name;
-}
-
-@mixin animation-duration($duration) {
-   -webkit-animation-duration: $duration;
-   animation-duration: $duration;
-}
-
-@mixin animation-timing-function($timing-function) {
-   -webkit-animation-timing-function: $timing-function;
-   animation-timing-function: $timing-function;
-}
-
-@mixin animation-delay($delay) {
-   -webkit-animation-delay: $delay;
-   animation-delay: $delay;
-}
-
-@mixin animation-iteration-count($iteration-count) {
-   -webkit-animation-iteration-count: $iteration-count;
-   animation-iteration-count: $iteration-count;
-}
-
-@mixin animation-direction($direction) {
-   -webkit-animation-direction: $direction;
-   animation-direction: $direction;
-}

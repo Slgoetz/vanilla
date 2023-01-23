@@ -15,7 +15,6 @@
 //===============================================================/
 //  Break Point Helpers
 //===============================================================/
-
 .hide-on-mobile {
    @media #{$tablet-portrait} {
       display: none !important;
@@ -83,11 +82,21 @@
       margin-bottom: $gridSize * $i;
    }
 
+   .my#{$i} {
+      margin-top: $gridSize * $i;
+      margin-bottom: $gridSize * $i;
+   }
+
    .pt#{$i} {
       padding-top: $gridSize * $i;
    }
 
    .pb#{$i} {
+      padding-bottom: $gridSize * $i;
+   }
+
+   .py#{$i} {
+      padding-top: $gridSize * $i;
       padding-bottom: $gridSize * $i;
    }
 }
@@ -112,7 +121,7 @@
    }
 }
 
-@mixin ml-mr($col, $gut, $outGut: 0) {
+@mixin mx($col, $gut, $outGut: 0) {
    margin-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
    margin-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
 
@@ -143,7 +152,7 @@
    }
 }
 
-@mixin pl-pr($col, $gut, $outGut: 0) {
+@mixin px($col, $gut, $outGut: 0) {
    padding-left: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
    padding-right: (($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut));
 
